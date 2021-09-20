@@ -1,4 +1,5 @@
 ﻿using BlogCore.AccesoDatos.Data.Repository;
+using BlogCore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
