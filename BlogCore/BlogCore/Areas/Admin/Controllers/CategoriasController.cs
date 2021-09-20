@@ -1,4 +1,5 @@
-﻿using BlogCore.AccesoDatos.Data.Repository;
+﻿using BlogCore.AccesoDatos.Data;
+using BlogCore.AccesoDatos.Data.Repository;
 using BlogCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,13 +13,14 @@ namespace BlogCore.Areas.Admin.Controllers
     public class CategoriasController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
+        private readonly ApplicationDbContext _context;
 
         public CategoriasController(IContenedorTrabajo contenedorTrabajo)
         {
             _contenedorTrabajo = contenedorTrabajo;
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -34,7 +36,7 @@ namespace BlogCore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Categoria categoria)
         {
-           if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _contenedorTrabajo.Categoria.Add(categoria); ;
                 _contenedorTrabajo.Save();
@@ -47,23 +49,33 @@ namespace BlogCore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-                  Categoria categoria = new Categoria ();
+            Categoria categoria = new Categoria();
             categoria = _contenedorTrabajo.Categoria.Get(id);
-            if(categoria == null)
-                {
+            if (categoria == null)
+            {
                 return NotFound();
-                }
+            }
             return View(categoria);
         }
 
+
+        public List<Categoria> ListaCategorias()
+        {
+            var ListaCategorias = _context.Categoria.ToList();
+            return  ListaCategorias;
+        }
 
 
         #region LLAMADAS A LA API
         [HttpGet]
         public IActionResult GetAll()
         {
+            //var data = _contenedorTrabajo.Categoria.GetAll();
             return Json(new { data = _contenedorTrabajo.Categoria.GetAll ()});
+            //return Json(new { });
         }
+
+
 
         #endregion
 

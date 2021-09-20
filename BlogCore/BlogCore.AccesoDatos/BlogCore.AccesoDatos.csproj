@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210920113756_CorreccionCampoEnteroOrdenCategoria3.cs" />
+    <Compile Remove="Migrations\20210920113756_CorreccionCampoEnteroOrdenCategoria3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="_ViewStart.cshtml" />
   </ItemGroup>
 

@@ -10,7 +10,8 @@ function cargarDatatable() {
         "ajax": { 
             "url": "/Admin/Categorias/GetAll",
             "type": "GET",
-            "datatype": "json"
+            "datatype":"json"
+            
         },
         "columns": [
             { "data": "id", "width": "5%" },
@@ -19,7 +20,7 @@ function cargarDatatable() {
         {
             "data": "id",
             "render": function (data) {
-                console.log(data);
+             
                 return `< div class="text-center">
                          <a href='/Admin/Categorias/Edit/${data}' class='btn btn-succes text-white' style='cursor:pointer; width: 100px; '>
                          <i class='fas fa-edit'></i> Editar
